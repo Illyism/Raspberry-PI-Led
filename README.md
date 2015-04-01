@@ -2,6 +2,11 @@
 
 For the NMCT Data Communication project. Using WS2801.
 
+1. [Setting up the Raspberry PI](#setting-up-the-raspberry-pi)
+2. [GPIO Interface](#gpio-interface)
+3. [Raspberry PI GPIO](#raspberry-pi-gpio)
+4. [Blinking a LED](#blinking-a-led)
+
 
 ## Setting up the Raspberry PI
 
