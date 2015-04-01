@@ -6,6 +6,8 @@ For the NMCT Data Communication project. Using WS2801.
 2. [GPIO Interface](#gpio-interface)
 3. [Raspberry PI GPIO](#raspberry-pi-gpio)
 4. [Blinking a LED](#blinking-a-led)
+5. [Webserver](#webserver)
+5.1. [Nginx](#nginx)
 
 
 ## Setting up the Raspberry PI
@@ -58,24 +60,50 @@ It siply blinks the LED on GPIO pin 4.
 
 int main (int argc, char *argv[])
 {
-  int pin, i;
-  scanf("%d", &pin);
-  printf("pin %d \n", pin);
+int pin, i;
+scanf("%d", &pin);
+printf("pin %d \n", pin);
 
-  if (wiringPiSetup() == -1)
-      exit (1);
-  
-  pinMode(pin, OUTPUT);
+if (wiringPiSetup() == -1)
+    exit (1);
 
-  for (i = 0; i < 10; i++) {
-     printf("LED %d ON\n", pin);
-     digitalWrite(pin, 1);
-     delay(50);
-     printf("LED %d OFF\n", pin);
-     digitalWrite(pin, 0);
-     delay(50);
-  }
+pinMode(pin, OUTPUT);
 
-  return 0;
+for (i = 0; i < 10; i++) {
+   printf("LED %d ON\n", pin);
+   digitalWrite(pin, 1);
+   delay(50);
+   printf("LED %d OFF\n", pin);
+   digitalWrite(pin, 0);
+   delay(50);
+}
+
+return 0;
+}
+```
+
+## Webserver
+
+### Nginx
+
+Nginx is a HTTP and reverse proxy server. It is faster and easier compared to Apache.
+In Arch, you can simply install it with `pacman -S nginx`. The configuration is in `/etc/nginx`.
+
+```bash➜
+➜ pacman -S nginx➜
+➜ cd /etc/nginx
+➜ cat nginx.conf | grep -Ev '(#.*$)|(^$)' > nginx.conf
+➜ cp /usr/share/nginx/html/* /srv/http
+```
+
+Then change the configuration to load file from `/srv/http`.
+
+```
+location / {
+  root   /srv/http;
+  index  index.html index.htm;
+}
+location = /50x.html {
+    root   /srv/http;
 }
 ```
