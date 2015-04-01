@@ -33,13 +33,13 @@ To read and send data through the GPIO pins I've decided to use [wiringPi](http:
 
 Here is the setup for the GPIO.
 
-Header | GPIO | Component | -
---- | --- | --- | ---
-7  | 4  | LED        |
-11 | 17 | Switch     |
-12 | 18 | Pushbutton |
-15 | 22 | Green      | Clock |
-16 | 23 | White      | Data |
+Physical  | BCM GPIO | WiringPi | Component | ---
+--------- | -------- | -------- | --------- | ---
+7         | 4        | 7        | LED       |
+11        | 17       | 0        | Switch    |
+12        | 18       | 1        | Pushbutton|
+15        | 22       | 3        | Green     | Clock |
+16        | 23       | 4        | White     | Data  |
 
 And here is the WS2801 spec.
 
