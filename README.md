@@ -25,7 +25,7 @@ feels much like using the Arduino wiring system.
 
 Here is the setup for the GPIO.
 
-Header | GPIO | Compnent
+Header | GPIO | Component
 --- | --- | ---
 7  | 4  | LED        |
 11 | 17 | Switch     |
