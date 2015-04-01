@@ -31,22 +31,22 @@ To read and send data through the GPIO pins I've decided to use [wiringPi](http:
 
 Here is the setup for the GPIO.
 
-Header | GPIO | Component
---- | --- | ---
+Header | GPIO | Component | -
+--- | --- | --- | ---
 7  | 4  | LED        |
 11 | 17 | Switch     |
 12 | 18 | Pushbutton |
-15 | 22 | Green      |
-16 | 23 | White      |
+15 | 22 | Green      | Clock |
+16 | 23 | White      | Data |
 
 And here is the WS2801 spec.
 
 |||
 --- | ---
-Rood  | 5V    
-Blauw | GND   
-Groen | Clock 
-Wit   | Data
+Red   | 5V    
+Blue  | GND   
+Green | Clock 
+White | Data
 
 ## Blinking a led
 
