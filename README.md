@@ -25,8 +25,8 @@ feels much like using the Arduino wiring system.
 
 Here is the setup for the GPIO.
 
-Header | GPIO | Component
-- | - | -
+Header|GPIO|Component
+--|:--|--
 7  | 4  | LED       
 11 | 17 | Switch     
 12 | 18 | Pushbutton 
