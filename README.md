@@ -26,13 +26,14 @@ feels much like using the Arduino wiring system.
 Here is the setup for the GPIO.
 
 Header | GPIO | Component
--|-|-
+- | - | -
 7  | 4  | LED       
 11 | 17 | Switch     
 12 | 18 | Pushbutton 
 15 | 22 | Green      
 16 | 23 | White      
 
+And here is the WS2801 spec.
 
 ||
 -|-|
