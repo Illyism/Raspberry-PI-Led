@@ -7,7 +7,7 @@ For the NMCT Data Communication project. Using WS2801.
 3. [Raspberry PI GPIO](#raspberry-pi-gpio)
 4. [Blinking a LED](#blinking-a-led)
 5. [Webserver](#webserver)
-5.1. [Nginx](#nginx)
+    1. [Nginx](#nginx)
 
 
 ## Setting up the Raspberry PI
