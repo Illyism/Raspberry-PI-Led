@@ -17,15 +17,14 @@ I chose [Archlinux ARM](http://archlinuxarm.org/platforms/armv6/raspberry-pi) be
 and minimal setup, it does not come with an Xserver pre-installed or any other bloatware like the Raspbian OS.
 
 Follow the installation instructions on the page above, plug in ethernet, HDMI and a keyboard and you're ready to go.
-Login with the default `root` user and the default `root` password and run `ifconfig` or `ip addr show eth0` to determine
-your IP address. Now you can SSH into your PI using that address.
+Login with the default `root` user and the default `root` password and run `ifconfig` or `ip addr show eth0` to determine your IP address. Now you can SSH into your PI using that address.
 
 
 ## GPIO Interface
 
-To read and send data through the GPIO pins I've decided to use [wiringPi](http://wiringpi.com/). It's a C library, the library
-feels much like using the Arduino wiring system.
+To read and send data through the GPIO pins I've decided to use [wiringPi](http://wiringpi.com/). It's a C library, the library feels much like using the Arduino wiring system.
 
+[Download and install](http://wiringpi.com/download-and-install/) wiringPi and run `gpio` to see if it installed correctly.
 
 
 ## Raspberry PI GPIO
