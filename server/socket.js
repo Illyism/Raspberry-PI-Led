@@ -6,7 +6,7 @@ module.exports = function(opt) {
 
   var client = new net.Socket();
   client.connect(opt.port || "4561", opt.host || "localhost", function() {
-   console.log("connected");
+    console.log("connected");
   });
 
   client.on("data", function(data) {
@@ -14,7 +14,7 @@ module.exports = function(opt) {
   });
 
   client.on("close", function() {
-   console.log("Closed");       
+    console.log("Closed");       
   });
 
 
