@@ -2,15 +2,17 @@
 
 For the NMCT Data Communication project. Using WS2801.
 
-1. [Setting up the Raspberry PI](#setting-up-the-raspberry-pi)
-2. [GPIO Interface](#gpio-interface)
-3. [Raspberry PI GPIO](#raspberry-pi-gpio)
-4. [Blinking a LED](#blinking-a-led)
+1. [Getting Started](#getting-started)
+    1. [Setting up the Raspberry PI](#setting-up-the-raspberry-pi)
+    2. [GPIO Interface](#gpio-interface)
+    3. [Raspberry PI GPIO](#raspberry-pi-gpio)
+2. [LEDs](#leds)
+    1. [Blinking a LED](#blinking-a-led)
 5. [Webserver](#webserver)
     1. [Nginx](#nginx)
 
-
-## Setting up the Raspberry PI
+## Getting Started
+### Setting up the Raspberry PI
 
 The first step is to set up the Raspberry PI.
 I chose [Archlinux ARM](http://archlinuxarm.org/platforms/armv6/raspberry-pi) because of its faster boot times
@@ -20,35 +22,39 @@ Follow the installation instructions on the page above, plug in ethernet, HDMI a
 Login with the default `root` user and the default `root` password and run `ifconfig` or `ip addr show eth0` to determine your IP address. Now you can SSH into your PI using that address.
 
 
-## GPIO Interface
+### GPIO Interface
 
 To read and send data through the GPIO pins I've decided to use [wiringPi](http://wiringpi.com/). It's a C library, the library feels much like using the Arduino wiring system.
 
 [Download and install](http://wiringpi.com/download-and-install/) wiringPi and run `gpio` to see if it installed correctly.
 
 
-## Raspberry PI GPIO
+### Raspberry PI GPIO
 
 Here is the setup for the GPIO.
 
-Header | GPIO | Component
---- | --- | ---
-7  | 4  | LED        |
-11 | 17 | Switch     |
-12 | 18 | Pushbutton |
-15 | 22 | Green      |
-16 | 23 | White      |
+Physical  | BCM GPIO | WiringPi | Component | ---
+--------- | -------- | -------- | --------- | ---
+7         | 4        | 7        | LED       |
+11        | 17       | 0        | Switch    |
+12        | 18       | 1        | Pushbutton|
+15        | 22       | 3        | Green     | Clock |
+16        | 23       | 4        | White     | Data  |
 
 And here is the WS2801 spec.
 
 |||
 --- | ---
-Rood  | 5V    
-Blauw | GND   
-Groen | Clock 
-Wit   | Data
+Red   | 5V    
+Blue  | GND   
+Green | Clock 
+White | Data
 
-## Blinking a led
+---
+
+## LEDs
+
+### Blinking a led
 
 To test if everything works correctly, I've started with a simple blink example written in C.
 It siply blinks the LED on GPIO pin 4.
@@ -80,6 +86,11 @@ for (i = 0; i < 10; i++) {
 return 0;
 }
 ```
+
+### Controlling the LED array.
+
+
+---
 
 ## Webserver
 
