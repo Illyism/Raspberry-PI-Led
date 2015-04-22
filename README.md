@@ -90,6 +90,12 @@ return 0;
 ### Controlling the LED array.
 
 
+
+### Sending commands
+
+
+
+
 ---
 
 ## Webserver
@@ -117,3 +123,9 @@ location = /50x.html {
     root   /srv/http;
 }
 ```
+
+
+
+# Ref
+
+* http://www.linuxhowtos.org/C_C++/socket.htm

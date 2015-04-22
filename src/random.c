@@ -10,7 +10,7 @@
 int PIN_CLOCK = 3; // | 15 | GPIO 22
 int PIN_DATA = 4;  // | 16 | GPIO 23
 int PIN_LED = 7;
-int led_count = 10;
+int LED_COUNT = 10;
 time_t t;
 int c;
 
@@ -33,7 +33,7 @@ int main (int argc, char *argv[])
   pinMode(PIN_DATA, OUTPUT);
   pinMode(PIN_LED, OUTPUT);
 
-  for (i = 0; i < led_count; i++) {
+  for (i = 0; i < LED_COUNT; i++) {
     for (j = 0; j < 8; j++) setColor();
     for (j = 0; j < 8; j++) setColor();
     for (j = 0; j < 8; j++) setColor();
