@@ -9,6 +9,7 @@
 int main (int argc, char *argv[])
 {
   int pin, i;
+  printf("Enter pin #:\n");
   scanf("%d", &pin);
   printf("pin %d \n", pin);  
 
@@ -20,10 +21,10 @@ int main (int argc, char *argv[])
   for (i = 0; i < 10; i++){
     printf("LED %d On\n", pin);
     digitalWrite(pin, 1);
-    delay(50);
+    delay(100);
     printf("LED %d Off\n", pin);
     digitalWrite(pin, 0);
-    delay(50);
+    delay(100);
   }
  
   return 0;
