@@ -16,7 +16,7 @@ white:
 random:
 	gcc -Wall -o "bin/random" src/random.c -lwiringPi
 led:
-	gcc -Wall -o "bin/led" src/led.c
+	gcc -Wall -o "bin/led" src/led.c -lwiringPi
 
 
 less: $(CSS_FILES)

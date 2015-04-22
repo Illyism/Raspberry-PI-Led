@@ -15,7 +15,7 @@ int n, m;
 int PIN_CLOCK = 3; // | 15 | GPIO 22
 int PIN_DATA = 4;  // | 16 | GPIO 23
 int LED_COUNT = 10;
-char rgb_buffer[10*3*8];
+char rgb_buffer[10*3*8] = "";
 
 void error(const char *msg)
 {
@@ -26,19 +26,20 @@ void error(const char *msg)
 int led_listen() {
   bzero(buffer,256);
   n = read(newsockfd, buffer, 255);
-  rgb_buffer = strcat(rgb_buffer, buffer);
+  strcat(rgb_buffer, buffer);
   printf("%s\n",rgb_buffer);
   return n;
 }
 
-void led_write_bit(bool bit) {
+void led_write_bit(int bit) {
   digitalWrite(PIN_CLOCK, LOW);
-  digitalWrite(PIN_DATA, bit);
+  digitalWrite(PIN_DATA, bit == '1');
   digitalWrite(PIN_CLOCK, HIGH); 
 }
 
 void led_write_buffer() {
-  int len = strlen(rgb_buffer);
+  // int len = strlen(rgb_buffer);
+  int i;
   for (i = 0; rgb_buffer[i] != 0; i++) {
     led_write_bit(rgb_buffer[i]);
   }
@@ -89,7 +90,7 @@ int main(int argc, char *argv[])
   if (newsockfd < 0) 
       error("ERROR on accept");
 
-  while (led_listen_to_next_group() > 0) {}
+  while (led_listen() > 0) {}
 
   close(newsockfd);
   close(sockfd);
