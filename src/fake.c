@@ -6,8 +6,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-#include <wiringPi.h>
-
 int sockfd, newsockfd, portno;
 char buffer[10*3*8];
 int n, m;
@@ -23,11 +21,7 @@ void error(const char *msg)
 }
 
 
-void led_write_bit(int bit) {
-  digitalWrite(PIN_CLOCK, LOW);
-  digitalWrite(PIN_DATA, bit == '1');
-  digitalWrite(PIN_CLOCK, HIGH); 
-}
+void led_write_bit(int bit) {}
 
 void led_write_buffer() {
   int i;
@@ -37,31 +31,25 @@ void led_write_buffer() {
 }
 
 int led_respond() {
-  m = write(newsockfd, "OK", 3);
+  m = write(newsockfd, "OK", 2);
   return m;
 }
 
 int led_listen() {
-  bzero(buffer, 10*3*8);
+  bzero(buffer,10*3*8);
   n = read(newsockfd, buffer, 10*3*8);
 
   if (strlen(buffer) >= 10*3*8) {
     led_write_buffer();
-    led_respond()
+    led_respond();
   }
 
   return n;
 }
 
+
 int main(int argc, char *argv[])
 {
-  if (wiringPiSetup() == -1) {
-    exit(1);
-  }
-  
-  pinMode(PIN_CLOCK, OUTPUT);
-  pinMode(PIN_DATA, OUTPUT);
-
   if (argc < 2) {
     portno = 4561;
     fprintf(stderr, "Listening on port %d\n", portno);

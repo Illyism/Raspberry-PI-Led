@@ -30,4 +30,5 @@
 
 *.swp
 
-test
+
+bin/*

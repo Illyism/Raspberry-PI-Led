@@ -17,6 +17,8 @@ random:
 	gcc -Wall -o "bin/random" src/random.c -lwiringPi
 led:
 	gcc -Wall -o "bin/led" src/led.c -lwiringPi
+fake:
+	gcc -Wall -o "bin/fake" src/fake.c
 
 
 less: $(CSS_FILES)
