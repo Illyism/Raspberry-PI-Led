@@ -23,13 +23,6 @@ void error(const char *msg)
     exit(1);
 }
 
-int led_listen() {
-  bzero(buffer,256);
-  n = read(newsockfd, buffer, 255);
-  strcat(rgb_buffer, buffer);
-  printf("%s\n",rgb_buffer);
-  return n;
-}
 
 void led_write_bit(int bit) {
   digitalWrite(PIN_CLOCK, LOW);
@@ -50,6 +43,19 @@ int led_respond() {
   return m;
 }
 
+int led_listen() {
+  bzero(buffer,256);
+  n = read(newsockfd, buffer, 255);
+  strcat(rgb_buffer, buffer);
+
+  printf("%d %s\n", strlen(rgb_buffer), rgb_buffer);
+
+  if (strlen(rgb_buffer) >= 10*3*8) {
+    led_write_buffer();
+    strcpy(rgb_buffer, "");
+  }
+  return n;
+}
 int main(int argc, char *argv[])
 {
   if (wiringPiSetup() == -1) {
