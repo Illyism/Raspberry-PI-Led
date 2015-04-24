@@ -89,11 +89,27 @@ return 0;
 
 ### Controlling the LED array.
 
+Next step is to try to get the LED array to work. I've had some trouble with it and this is the part where I've been stuck in for a while. I had placed delays on soem parts of the code and it would cause incorrect clock timing causing the LEDs to misbehave. After stripping out the delays and setting the clock to go from LOW to HIGH it worked.
+
+As a starting point, the LEDs would received a full [white](https://github.com/Illyism/Raspberry-PI-Led/blob/master/src/white.c) colour. Then a [random](https://github.com/Illyism/Raspberry-PI-Led/blob/master/src/random.c) color.
 
 
-### Sending commands
+### Making a socket
+
+And when everything was working correctly, it was time to move on to the [next step](https://github.com/Illyism/Raspberry-PI-Led/blob/master/src/led.c) to making the LEDs be able to receive any type of data from any kind of interface. I've used a socket that first listens for any established connections and then listens to any data in the form of bits.
+
+So all that is required is to send a bit stream to the socket, the interface waits for enough data to fill up all the leds then sends the data through the GPIO and flushes the buffer and starts over to listening to any data.
 
 
+### Making a server
+
+To interact with the socket, I've decided on adding [another server](https://github.com/Illyism/Raspberry-PI-Led/blob/master/server/socket.js) written in Node to make it easier to interact with the LEDs, I wanted to have an easy to control [API](https://github.com/Illyism/Raspberry-PI-Led/blob/master/server/server.js) so I can send data in HEX colours, RGB colours, add in effects such as loops, rainbows, timers and so on.
+
+
+
+### Connecting to the server
+
+And finally, for the end-user, to interact with the server there is a [client](https://github.com/Illyism/Raspberry-PI-Led/tree/master/client), that could be a HTML web server or a [CLI](https://github.com/Illyism/Raspberry-PI-Led/blob/master/client/client.js) application.
 
 
 ---
