@@ -4,9 +4,11 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "color-convert": "^0.5.2",
     "dotenv": "^1.1.0",
     "lodash": "^3.7.0",
-    "node-bitarray": "0.0.2"
+    "node-bitarray": "0.0.2",
+    "restify": "^3.0.2"
   },
   "devDependencies": {},
   "scripts": {

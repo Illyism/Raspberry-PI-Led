@@ -13,6 +13,7 @@
     "express": "^4.12.3",
     "jade": "^1.9.2",
     "lodash": "^3.7.0",
-    "node-bitarray": "0.0.2"
+    "node-bitarray": "0.0.2",
+    "request": "^2.55.0"
   }
 }

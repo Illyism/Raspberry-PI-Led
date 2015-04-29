@@ -1,11 +1,14 @@
+var config = require("./config");
 var net = require("net");
 var BitArray = require('node-bitarray');
 var _ = require("lodash");
 
+
+// Converts JSON to a bitstream
 module.exports = function(opt) {
 
   var client = new net.Socket();
-  client.connect(opt.port || "4561", opt.host || "localhost", function() {
+  client.connect(opt.port || config.socket.port, opt.host || config.socket.host, function() {
     console.log("connected");
   });
 
@@ -29,6 +32,7 @@ module.exports = function(opt) {
       })
       .join("");
     client.write(buf);
+    return arr;
   }
 
   function write_rgb_array(arr) {
@@ -41,6 +45,7 @@ module.exports = function(opt) {
       })
       .join("");
     client.write(buf);
+    return arr;
   }
 
   var write = console.log;

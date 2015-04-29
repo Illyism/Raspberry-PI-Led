@@ -1,38 +1,104 @@
 extends /layout
 
 block content
-  section
-    .input
-      label Led 1
-      input(type="text", placeholder="#123456")
-    .input
-      label Led 2
-      input(type="text", placeholder="#123456")
-    .input
-      label Led 3
-      input(type="text", placeholder="#123456")
-    .input
-      label Led 4
-      input(type="text", placeholder="#123456")
-    .input
-      label Led 5
-      input(type="text", placeholder="#123456")
-    .input
-      label Led 6
-      input(type="text", placeholder="#123456")
-    .input
-      label Led 7
-      input(type="text", placeholder="#123456")
-    .input
-      label Led 8
-      input(type="text", placeholder="#123456")
-    .input
-      label Led 9
-      input(type="text", placeholder="#123456")
-    .input
-      label Led 10
-      input(type="text", placeholder="#123456")
+  .container-fluid
+    for ledrow in _.chunk(Leds.leds, 5)
+      .row
+        for led in ledrow
+          .col-md-2(class="led-"+led.id, style="background: #"+led.color)
+            h2 Led #{led.id}
+            input(data-id=led.id, type="text", class="led", value="#"+led.color)
+    
+    hr
+    button.btn-lg#commit Commit
+    button.btn-lg#random Randomize
+    button.btn-lg#rainbow Rainbow
 
 
-  section
-    button(type="submit") Send
+block scripts
+  script.
+    function byte2Hex(n)
+    {
+      var nybHexString = "0123456789ABCDEF";
+      return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
+    }
+    function RGB2Color(r,g,b)
+    {
+      return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+    }
+    function makeColorGradient(frequency1, frequency2, frequency3,
+                                phase1, phase2, phase3,
+                                center, width, len)
+     {
+       if (center == undefined)   center = 128;
+       if (width == undefined)    width = 127;
+       if (len == undefined)      len = 50;
+
+       var array = [];
+       for (var i = 0; i < len; ++i)
+       {
+          var red = Math.sin(frequency1*i + phase1) * width + center;
+          var grn = Math.sin(frequency2*i + phase2) * width + center;
+          var blu = Math.sin(frequency3*i + phase3) * width + center;
+          array.push(RGB2Color(red,grn,blu));
+       }
+       return array;
+     }
+  script.
+    $(function(){
+      $('.led').colorpicker().on('changeColor.colorpicker', function(e){
+        var targ = $(e.currentTarget);
+        var id = targ.data("id");
+        var color = e.color.toHex().substr(1);
+
+        targ.parent().css("background", e.color.toHex());
+
+        //$.post("http://" + config.host + ":" + config.port + "/led/" + id + "/color", e.color.toRGB());
+        $.post("http://" + config.host + ":" + config.port + "/led/" + id + "/color/" + color);
+        commit();
+      });
+
+      $("#commit").click(function() {
+        commit();
+      })
+
+      function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      $("#random").click(function() {
+        $(".colorpicker-element").each(function(i, el) {
+
+          $(el).colorpicker("setValue", getRandomColor());
+        })
+        commit();
+      })
+
+      var arr = makeColorGradient(.3,.3,.3,0,2,4, 128, 127, 50);
+
+      function nextRainbow() {
+        arr.unshift(arr[arr.length - 1]);
+        arr.pop();
+        $(".colorpicker-element").each(function(i, el) {
+          $(el).colorpicker("setValue", arr[i]);
+        })
+        commit();
+      
+      }
+
+      $("#rainbow").click(function() {
+        setInterval(function() {
+          nextRainbow()
+        }, 100);
+      })
+
+
+      function commit() {
+        $.post("http://" + config.host + ":" + config.port + "/led/commit");
+      }
+    });
