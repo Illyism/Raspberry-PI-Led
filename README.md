@@ -15,6 +15,8 @@ Change your clock, data and pin count if necessary and compile it.
 ```bash
 git clone https://github.com/Illyism/Raspberry-PI-Led.git
 make led
+
+bin/led
 ```
 
 ### Server
